@@ -1,9 +1,11 @@
 var express = require("express");
-var http = require("http");
+var exphbs = require("express-handlebars");
+
 const app = express();
 const morgan = require("morgan");
 var mysql = require("mysql");
 const bodyParser = require("body-parser");
+var http = require("http");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -12,8 +14,8 @@ app.use(express.static("./public"));
 
 app.use(morgan("short"));
 
-// the view engine Template parsing, using EJS types
-// app.set("view engine", "ejs");
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
 
 // create connection to our local database
 function getConnection() {
@@ -42,7 +44,8 @@ app.get("/users", (req, res) => {
 
 app.get("/", (req, res) => {
   console.log("Responding to root");
-  res.send("Hello Bob");
+  //   res.send("Hello Bob");
+  res.render("home");
 });
 
 app.listen(3700, () => {
