@@ -56,6 +56,39 @@ app.get("/", (req, res) => {
   });
 });
 
+// add user
+app.get("/user/add", (req, res) => {
+  res.render("add-user.handlebars", {
+    // users: "rows"
+  });
+});
+
+app.post("/user/add", (req, res) => {
+  console.log("Trying to create a new user...");
+  // console.log("First name: " + req.body.create_first_name);
+  // // capturing input from a user
+  // const firstName = req.body.create_first_name;
+  // const lastName = req.body.create_last_name;
+
+  // // first_name last_name the way they are defined in the data base
+  // const queryString = "INSERT INTO users (first_name, last_name) VALUES (?, ?)";
+  // // next step is the sequel query to use the input data and place it into the table (data base)
+  // getConnection().query(
+  //   queryString,
+  //   [firstName, lastName],
+  //   (err, results, fields) => {
+  //     if (err) {
+  //       console.log("Failed to insert new user: " + err);
+  //       res.sendStatus(500);
+  //       return;
+  //     }
+  //     userID = results.insertId;
+  //     console.log("Inserted a new user with id: ", results.insertId);
+
+  //   }
+  // );
+});
+
 app.listen(3700, () => {
   console.log("Server is listening on 3700");
 });
