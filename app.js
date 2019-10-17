@@ -43,9 +43,17 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  console.log("Responding to root");
-  //   res.send("Hello Bob");
-  res.render("home");
+  const queryString = "SELECT * FROM users";
+  getConnection().query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err);
+      res.sendStatus(500);
+      return;
+    }
+    res.render("home", {
+      users: rows
+    });
+  });
 });
 
 app.listen(3700, () => {
