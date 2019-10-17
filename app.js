@@ -56,7 +56,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// add user
+// add user. This page will be displayed when the user hits the button "Add new user"
+// located on the main page where the all users are displayed.
 app.get("/user/add", (req, res) => {
   res.render("add-user.handlebars", {
     // users: "rows"
