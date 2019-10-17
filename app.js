@@ -63,7 +63,8 @@ app.get("/user/add", (req, res) => {
     // users: "rows"
   });
 });
-
+// in addition, this function will use the same form provided by the get function request
+// and add a user to the database
 app.post("/user/add", (req, res) => {
   console.log("Trying to create a new user...");
   console.log("First name: " + req.body.userName + " " + req.body.userLastName);
