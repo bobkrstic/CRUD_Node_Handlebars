@@ -17,6 +17,8 @@ app.use(morgan("short"));
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
+const baseURL = "http://localhost:3700/";
+
 // create connection to our local database
 function getConnection() {
   return mysql.createConnection({
@@ -87,9 +89,14 @@ app.post("/user/add", (req, res) => {
       }
       userID = results.insertId;
       console.log("Inserted a new user with id: ", results.insertId);
+      res.redirect(baseURL);
     }
   );
 });
+
+// Edit user
+// the get method will take us to the page /user/edit and here we will have the data displayed with the chosen user already
+// once we change the data, we will use the POST method to post that edited data to the database
 
 app.listen(3700, () => {
   console.log("Server is listening on 3700");
