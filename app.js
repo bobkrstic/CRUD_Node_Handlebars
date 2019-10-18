@@ -113,7 +113,7 @@ app.get("/user/edit/:id", (req, res) => {
   });
 });
 
-// POST method for adding an edited user info
+// POST method for EDITING user data
 app.post("/user/edit/:id", (req, res) => {
   console.log("Trying to update a user with user id = " + req.params.id);
   console.log(req.params.id);
