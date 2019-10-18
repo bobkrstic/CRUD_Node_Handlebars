@@ -137,8 +137,25 @@ app.post("/user/edit/:id", (req, res) => {
         res.sendStatus(500);
         return;
       }
+      // this will console.log our result object where we can see that the affectedRows: changed to 1
+      // which will further confirm that we have successfully updated our database and will then proceed to redirect us to the beggining
+      console.log(JSON.parse(JSON.stringify(results)));
 
       if (results.affectedRows) {
+        res.redirect(baseURL);
+      }
+    }
+  );
+});
+
+// delete user
+app.get("/user/delete/:id", (req, res) => {
+  const userId = req.params.id;
+  console.log("Trying to delete user: " + userId);
+  getConnection().query(
+    "DELETE FROM users WHERE id = " + userId + "",
+    (err, rows, fields) => {
+      if (rows.affectedRows) {
         res.redirect(baseURL);
       }
     }

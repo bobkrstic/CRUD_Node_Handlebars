@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    {{#if users}}
     <table style="margin-left: 20px; width: 95%" class="table table-sm table-hover">
         <thead>
             <th>Id</th>
@@ -26,12 +27,15 @@
                 <td>{{this.last_name}}</td>
                 <td>
                     <a href="/user/edit/{{this.id}}" class="btn btn-primary">Edit</a>
-                    <a href="/users" class="btn btn-warning">Delete</a>
+                    <a href="/user/delete/{{this.id}}" class="btn btn-warning">Delete</a>
                 </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+    {{else}}
+    <h1>There are no users to display, please add users first</h1>
+    {{/if}}
     {{!-- this button will send a GET request to the route user/add, from which we will render the page add-user.hanldebars --}}
     <div style="margin-left: 20px; witdth: 95%">
         <a href="user/add" class="btn btn-info">Add new user</a>
