@@ -7,7 +7,7 @@ var mysql = require("mysql");
 const bodyParser = require("body-parser");
 var http = require("http");
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // server will serve all the files inside the puclic folder
 app.use(express.static("./public"));
@@ -95,8 +95,55 @@ app.post("/user/add", (req, res) => {
 });
 
 // Edit user
-// the get method will take us to the page /user/edit and here we will have the data displayed with the chosen user already
+// the get method will take us to the page /user/edit/:id and here we will have the data displayed with the chosen user already
 // once we change the data, we will use the POST method to post that edited data to the database
+app.get("/user/edit/:id", (req, res) => {
+  console.log("Fetching user with id: " + req.params.id);
+  userId = req.params.id;
+  const queryString = "SELECT * FROM users WHERE id = ?";
+
+  getConnection().query(queryString, [userId], (err, rows, fields) => {
+    const userIDfromDatabase = rows[0].id;
+
+    res.render("edit-user.handlebars", {
+      userID: userIDfromDatabase,
+      userName: rows[0].first_name,
+      userLastName: rows[0].last_name
+    });
+  });
+});
+
+// POST method for adding an edited user info
+app.post("/user/edit/:id", (req, res) => {
+  console.log("Trying to update a user with user id = " + req.params.id);
+  console.log(req.params.id);
+  console.log("First name: " + req.body.userName);
+  // capturing input from a user
+
+  const userId = req.params.id;
+  const firstName = req.body.userName;
+  const lastName = req.body.userLastName;
+
+  // first_name last_name the way they are defined in the data base
+  const queryString =
+    "UPDATE users SET first_name = ?, last_name = ? WHERE id = " + userId + "";
+  // next step is the sequel query to use the input data and place it into the table (data base)
+  getConnection().query(
+    queryString,
+    [firstName, lastName],
+    (err, results, fields) => {
+      if (err) {
+        console.log("Failed to update user: " + err);
+        res.sendStatus(500);
+        return;
+      }
+
+      if (results.affectedRows) {
+        res.redirect(baseURL);
+      }
+    }
+  );
+});
 
 app.listen(3700, () => {
   console.log("Server is listening on 3700");
