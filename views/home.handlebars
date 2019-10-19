@@ -19,6 +19,7 @@
                 <th>Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Actions</th>
             </thead>
             <tbody class="table-hover">
                 {{#each users}}
@@ -27,8 +28,8 @@
                     <td>{{this.first_name}}</td>
                     <td>{{this.last_name}}</td>
                     <td style="width: 20%">
-                        <a href="/user/edit/{{this.id}}" class="btn btn-primary">Edit</a>
-                        <a href="/user/delete/{{this.id}}" class="btn btn-warning">Delete</a>
+                        <a href="/user/edit/{{this.id}}" class="btn btn-primary" style="width: 50%">Edit</a>
+                        <a href="/user/delete/{{this.id}}" class="btn btn-warning" style="width: 45%">Delete</a>
                     </td>
                 </tr>
                 {{/each}}
