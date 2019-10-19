@@ -13,8 +13,9 @@
 <body>
     <div>
         {{#if users}}
-        <table style="margin-left: 20px; width: 95%" class="table table-sm table-hover">
-            <thead>
+        <table style="margin-left: 20px; width: 80%; margin-top: 50px"
+            class="table table-sm table-hover table-bordered">
+            <thead class="thead-dark">
                 <th>Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -25,7 +26,7 @@
                     <td>{{this.id}}</td>
                     <td>{{this.first_name}}</td>
                     <td>{{this.last_name}}</td>
-                    <td>
+                    <td style="width: 20%">
                         <a href="/user/edit/{{this.id}}" class="btn btn-primary">Edit</a>
                         <a href="/user/delete/{{this.id}}" class="btn btn-warning">Delete</a>
                     </td>
@@ -40,12 +41,7 @@
         <div style="margin-left: 20px; witdth: 95%">
             <a href="user/add" class="btn btn-info">Add new user</a>
         </div>
-        <hr />
-
-
     </div>
-
-
 </body>
 
 </html>
